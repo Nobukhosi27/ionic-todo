@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item lines="none" >
+      <ion-label style="font-weight:800; font-size:3em; color:plum ;">ToDo List</ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
+  <ion-item>
+    <ion-input [(ngModel)]="newListTitle" placeholder="List Title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="newListDescription" placeholder="List Description"></ion-input>
+  </ion-item>
+  <ion-button expand="full" (click)="addList()">Add List</ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let list of lists">
+      <ion-label>
+        <h2 [ngClass]="{'completed': list.completed}">{{ list.title }}</h2>
+        <p>{{ list.description }}</p>
+      </ion-label>
+      <ion-checkbox slot="start" [(ngModel)]="list.completed" (ionChange)="toggleCompletion(list.id)"></ion-checkbox>
+      <ion-button color="danger" (click)="deleteList(list.id)">Delete</ion-button>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>
